@@ -2,44 +2,47 @@ class Solution:
     # @return a string
     def convert(self, s, nRows):
         if nRows == 1:
-            return 
-        rowstep = 2 * nRows -2
-        zigzag = False
-        zigzaglist = []
-        stringlist = list(s)
-        for i in range(0,len(stringlist),rowstep):
-            ziglist = []
-            zaglist = []
-            for j in range(rowstep):
-                zag = [0]*nRows
-                try :
-                    data = stringlist[i + j]
-                except:
-                    break
-                if j%rowstep < nRows:
-                    print i,j
-                    ziglist.append(data)
-                else:
-                    zag[nRows +1 - j%rowstep] = data
-                    zaglist.append(zag)
-            zigzaglist.append(ziglist)
-            for zag in zaglist:
-                zigzaglist.append(zag)
-        print zigzaglist
-        temp = []
-        for j in range(nRows):
-            for zag in zigzaglist:
-                try:
-                    if zag[j] != 0:
-                        temp.append(zag[j])
-                except:
-                    break
+            return s
+            
+        length = len(s)
+        if length <= 1:
+            return s
+            
+        i,j  = divmod( length, 2*nRows-2)
+        col = 0
+        
+        if j == 0:
+            col = i*(nRows-1)
+        elif j <= nRows:
+            col = i*(nRows-1) + 1
+        else:
+            col = i*(nRows-1) + 1 + j- nRows
+            
+        matrix = [[0 for i in range(col)] for j in range(nRows)]
 
-
-        return ''.join(temp)
+        for k in range(length):
+            m,n = divmod(k, 2*nRows-2)
+            if n < nRows:
+                x = n
+                y = m*(nRows-1)
+            else:
+                x = 2 * nRows - n - 2
+                y = m*(nRows-1) + n- nRows + 1
+            print x, y, k
+            matrix[x][y] = s[k]
+        print matrix    
+        ret = []
+        for n in range(nRows):
+            for m in range(col):
+                if matrix[n][m] !=0 :
+                    ret.append(matrix[n][m])
+        return "".join(ret)
+                
+    
+        
 
 s = Solution()
-print s.convert('0123456789',3)    
+print s.convert('ABCD',3)    
                 
                 
             
