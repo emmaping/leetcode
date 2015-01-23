@@ -1,5 +1,5 @@
-public class temp {
-    public static int atoi(String str) {
+public class Solution {
+    public int atoi(String str) {
         boolean sign = false;
         int isNeg = 1;
         double ret = 0;
@@ -29,10 +29,5 @@ public class temp {
         }
 
         return intRet;
-    }
-    
-    public static void main(String[] args){
-    	System.out.println(11 / Math.pow(10, 0));
-    	System.out.println(11 / Math.pow(10, 1));
     }
 }
