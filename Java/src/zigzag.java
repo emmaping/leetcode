@@ -1,5 +1,4 @@
-public class zigzag
-{
+public class Solution{
   public String convert(String s, int nRows)
   {
     int length = s.length();
