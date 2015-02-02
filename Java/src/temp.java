@@ -1,38 +1,32 @@
+import java.util.List;
+import java.util.ArrayList;
+
 public class temp {
-    public static int atoi(String str) {
-        boolean sign = false;
-        int isNeg = 1;
-        double ret = 0;
-        str = str.trim();
-
-        for (int i = 0; i<str.length(); i++){
-            char c = str.charAt(i);
-            if ((c == '-' || c == '+') && !sign ) { 
-                sign = true;
-                if (c== '-'){
-                    isNeg = -1;
-                }
-            }
-            else if (c >= '0' && c <='9'){
-                ret = ret * 10 + Character.getNumericValue(c);
-            }
-            else{
-                break;
+    public static int minimumTotal(List<List<Integer>> triangle) {
+        if (triangle == null ) return 0;
+        int length = triangle.size();
+        if (length== 1) return triangle.get(0).get(0);
+        
+        List<Integer> a = triangle.get(length-1);
+        for (int i = length-2; i<-1; i--){
+            for (int j=0; j< i+1; j++){
+                int newValue = triangle.get(i).get(j) + Math.min(a.get(j),a.get(j+1));
+                a.set(j, newValue );
             }
         }
-        int intRet = (int)(ret*isNeg);
-        if (intRet > Integer.MAX_VALUE){
-            return Integer.MAX_VALUE;
-        }
-        if (intRet < Integer.MIN_VALUE){
-            return Integer.MIN_VALUE;
-        }
-
-        return intRet;
+        return a.get(0);
     }
     
     public static void main(String[] args){
-    	System.out.println(11 / Math.pow(10, 0));
-    	System.out.println(11 / Math.pow(10, 1));
+    	List<List<Integer>> triangle = new ArrayList<>();
+    	List<Integer> a = new ArrayList<>();
+    	List<Integer> b = new ArrayList<>();
+    	a.add(1);
+    	b.add(2);
+    	b.add(3);
+    	triangle.add(a);
+    	triangle.add(b);
+    	
+    	minimumTotal(triangle);
     }
 }
