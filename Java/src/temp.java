@@ -1,35 +1,36 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class temp
 {
   public static class Person
   {
 
-    public static int divide(int dividend, int divisor)
-    {
-      boolean isNeg = (dividend > 0 && divisor < 0) || (dividend < 0 && divisor > 0);
-
-      long ldividend = Math.abs((long) dividend);
-      final long ldivisor = Math.abs((long) divisor);
-      if (ldividend < ldivisor)
-        return 0;
-      long result = 0;
-
-      for (int i = Integer.SIZE - 1; i >= 0 && ldividend >= ldivisor; i--)
-      {
-        if (ldividend >= (ldivisor << i))
-        {
-          ldividend -= ldivisor << i;
-          result |= 1 << i;
-        }
-      }
-      if (isNeg)
-        result = -result;
-      return Math.min((int) result, Integer.MAX_VALUE);
-    }
+	    public static List<List<Integer>> combine(int n, int k) {
+	        List<Integer> prev = new ArrayList<>();
+	        List<List<Integer>> ret = new ArrayList<>();
+	        return helper(n, k, 1 ,prev, ret);
+	    
+	        
+	    }
+	    public static List<List<Integer>> helper(int n, int k, int offset, List<Integer> prev,  List<List<Integer>> ret) {
+	        if (k == 0){
+	            ret.add(prev);
+	            return ret;
+	        } 
+	        
+	        for (int i = offset; i < n-k+2; i++){
+	            List<Integer> cur = new ArrayList<>(prev);
+	            cur.add(i);
+	            helper(n, k-1, offset+1,cur, ret);
+	        }
+	        return ret;
+	    }
 
   }
 
   public static void main(String[] args)
   {
-    System.out.println(Person.divide(-2147483648, -1));
+    System.out.println(Person.combine(10, 5));
   }
 }
