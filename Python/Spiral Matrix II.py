@@ -1,4 +1,3 @@
-
 class Solution:
     # @return a list of lists of integer
     def generateMatrix(self, n):
@@ -13,10 +12,8 @@ class Solution:
         down = n-1
         left = 0
         right = n-1
-
-        i = 0
-        j = 0
         data = 1
+        
         while up <= down and left <= right:
             for i in range( left, right + 1):
                 ret[up][i] = data
