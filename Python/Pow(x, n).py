@@ -15,3 +15,5 @@ class Solution:
             n = n >> 1
         
         return ret
+s = Solution()
+print s.pow(3, 6)
