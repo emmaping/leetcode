@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class temp
+public class Solution
 {
   public List<String> findRepeatedDnaSequences(String s)
   {
@@ -30,11 +30,5 @@ public class temp
         ret.add(entry.getKey());
     }
     return ret;
-  }
-
-  public static void main(String[] args)
-  {
-    temp t = new temp();
-    System.out.println(t.findRepeatedDnaSequences("AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"));
   }
 }
