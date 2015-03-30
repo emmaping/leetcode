@@ -39,4 +39,4 @@ class Solution:
         self.ret.append(s)
             
 s = Solution()
-print s.fullJustify(["a"], 1)
+print s.fullJustify([" "], 2)

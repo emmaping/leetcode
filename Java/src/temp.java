@@ -1,40 +1,86 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class temp
 {
-  public List<String> findRepeatedDnaSequences(String s)
+  private List<String> ret = new ArrayList<>();
+
+  public List<String> fullJustify(String[] words, int L)
   {
-    HashMap<String, Integer> map = new HashMap<>();
-    List<String> ret = new ArrayList<>();
-    String key;
-    int value;
-    for (int i = 0; i < s.length() - 10; i++)
+    List<String> cur = new ArrayList<String>();
+    int length = 0;
+    if (L == 0)
     {
-      key = s.substring(i, i + 10);
-      if (map.containsKey(key))
+      ret.add("");
+      return ret;
+    }
+
+    for (String s : words)
+    {
+      if (length + s.length() > L - cur.size() + 1)
       {
-        value = map.get(key);
-        map.put(key, value + 1);
+        joinWord(cur, L - length);
+        length = s.length();
+        cur = new ArrayList<String>();
+        cur.add(s);
       }
       else
       {
-        map.put(key, 1);
+        cur.add(s);
+        length += s.length();
       }
     }
 
-    for (HashMap.Entry<String, Integer> entry : map.entrySet())
+    if (cur.size() > 0)
     {
-      if (entry.getValue() > 1)
-        ret.add(entry.getKey());
+      String lastline = "";
+      for (int i = 0; i < cur.size() - 1; i++)
+      {
+        lastline = lastline + cur.get(i) + " ";
+      }
+      lastline += cur.get(cur.size() - 1);
+      for (int j = 0; j < L - lastline.length(); j++)
+      {
+        lastline += " ";
+      }
+      ret.add(lastline);
     }
     return ret;
+  }
+
+  public void joinWord(List<String> cur, int r)
+  {
+    String s = "";
+    if (r == 0 || cur.size() == 1)
+    {
+      ret.add(cur.get(0));
+      return;
+    }
+    for (int i = 0; i < (r % (cur.size() - 1)); i++)
+    {
+      s += cur.get(i);
+      for (int j = 0; j < (r / (cur.size() - 1) + 1); j++)
+      {
+        s += " ";
+      }
+    }
+    for (int i = (r % (cur.size() - 1)); i < cur.size() - 1; i++)
+    {
+      s += cur.get(i);
+      for (int j = 0; j < (r / (cur.size() - 1)); j++)
+      {
+        s += " ";
+      }
+    }
+    s += cur.get(cur.size() - 1);
+    ret.add(s);
   }
 
   public static void main(String[] args)
   {
     temp t = new temp();
-    System.out.println(t.findRepeatedDnaSequences("AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"));
+    String[] words = new String[] { "This", "is", "an", "example", "of", "text", "justification." };
+
+    System.out.println(t.fullJustify(words, 16));
   }
 }
