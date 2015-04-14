@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-public class temp
+public class Solution
 {
   public String minWindow(String S, String T)
   {
@@ -42,6 +40,7 @@ public class temp
       if (listT.size() == 0)
       {
         boolean notFirst = true;
+
         for (List<Integer> val : dp.values())
         {
           if (notFirst)
@@ -65,7 +64,6 @@ public class temp
           end = max;
         }
       }
-      System.out.println(dp + String.valueOf(start) + String.valueOf(end));
     }
 
     if (listT.size() != 0)
@@ -76,13 +74,5 @@ public class temp
     {
       return S.substring(start, end + 1);
     }
-  }
-
-  public static void main(String[] args)
-  {
-    temp t = new temp();
-    String[] words = new String[] { "This", "is", "an", "example", "of", "text", "justification." };
-
-    System.out.println(t.minWindow("bdab", "ab"));
   }
 }
